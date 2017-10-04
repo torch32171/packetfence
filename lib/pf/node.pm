@@ -1057,7 +1057,7 @@ sub node_deregister {
 
     $info{'status'}    = 'unreg';
     $info{'regdate'}   = 0;
-    $info{'unregdate'} = 0;
+    $info{'unregdate'} = POSIX::strftime("%Y-%m-%d %H:%M:%S", localtime(time));
     $info{'lastskip'}  = 0;
     $info{'autoreg'}   = 'no';
 
