@@ -692,7 +692,7 @@ sub _node_view {
         %$node_info_ref,
         %$locationlog_info_ref,
     };
-
+    
     return ($node_info_ref);
 }
 
