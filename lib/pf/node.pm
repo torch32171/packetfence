@@ -406,7 +406,7 @@ sub node_db_prepare {
         SELECT node.mac FROM node
             RIGHT JOIN locationlog on node.mac=locationlog.mac
             RIGHT JOIN node_category USING (category_id)
-        WHERE node.mac != ? AND node.status="reg" AND node_category.name = ?  AND locationlog.connection_type != "Inline" and locationlog.end_time is NULL order by node.regdate DESC LIMIT 1 ]);
+        WHERE node.mac != ? AND node.status="reg" AND node_category.name = ?  AND locationlog.connection_type != "Inline" and locationlog.end_time = "0000-00-00 00:00:00" order by node.regdate DESC LIMIT 1 ]);
 
     $node_db_prepared = 1;
     return 1;
