@@ -257,7 +257,7 @@ sub locationlog_insert_start {
     if ( defined($mac) ) {
         $values{mac} = lc($mac);
     }
-    my $status = pf::dal::locationlog->creat(\%values);
+    my $status = pf::dal::locationlog->create(\%values);
     return (is_success($status));
 }
 
