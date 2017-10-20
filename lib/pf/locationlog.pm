@@ -129,7 +129,7 @@ sub locationlog_history_mac {
               UNIX_TIMESTAMP(end_time)|end_timestamp)
         ],
         -where => $where,
-        -order_by => [qw(-start_time -end_time)],
+        -order_by => [{-desc => 'start_time'}, {-desc => 'end_time'}],
         -limit => 25,
     }));
 }
@@ -155,7 +155,7 @@ sub locationlog_history_switchport {
             qw(mac switch switch_ip switch_mac port vlan role connection_type connection_sub_type dot1x_username ssid start_time end_time stripped_user_name realm ifDesc)
         ],
         -where => $where,
-        -order_by => [qw(-start_time -end_time)],
+        -order_by => [{-desc => 'start_time'}, {-desc => 'end_time'}],
     }));
 }
 
@@ -164,7 +164,7 @@ sub locationlog_view_open {
         -where => {
             end_time => 0,
         },
-        -order_by => '-start_time',
+        -order_by => { -desc => 'start_time' },
     });
 }
 
@@ -178,7 +178,7 @@ sub locationlog_view_open_switchport {
             end_time => 0,
         },
         -from => [-join => qw(locationlog =>{locationlog.mac=node.mac} node)],
-        -order_by => '-start_time',
+        -order_by => { -desc => 'start_time' },
     });
 }
 
@@ -192,7 +192,7 @@ sub locationlog_view_open_switchport_no_VoIP {
             end_time => 0,
         },
         -from => [-join => qw(locationlog =>{locationlog.mac=node.mac} node)],
-        -order_by => '-start_time',
+        -order_by => { -desc => 'start_time' },
     });
 }
 
@@ -207,7 +207,7 @@ sub locationlog_view_open_switchport_only_VoIP {
         },
         -from => [-join => qw(locationlog =>{locationlog.mac=node.mac} node)],
         -limit => 1,
-        -order_by => '-start_time',
+        -order_by => { -desc => 'start_time' },
     });
 }
 
@@ -220,7 +220,7 @@ sub locationlog_view_open_mac {
             end_time => 0,
         },
         -limit => 1,
-        -order_by => '-start_time',
+        -order_by => { -desc => 'start_time' },
     });
 }
 
@@ -528,7 +528,7 @@ sub locationlog_get_session {
             session_id => $session_id,
             end_time => 0,
         },
-        -order_by => '-start_time',
+        -order_by => { -desc => 'start_time' },
         -limit => 1,
     });
 }
@@ -560,7 +560,7 @@ sub locationlog_last_entry_mac {
        -where => {
            mac => $mac,
        },
-       -order_by => '-start_time',
+        -order_by => { -desc => 'start_time' },
        -limit => 1,
    });
 }
